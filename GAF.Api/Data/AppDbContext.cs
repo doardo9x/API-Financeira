@@ -46,23 +46,21 @@ public class AppDbContext : IdentityDbContext<User>
         List<User> usuarios = new() {
             new User(){
                 Id = "ddf093a6-6cb5-4ff7-9a64-83da34aee005",
-                Email = "gallojunior@gmail.com",
-                NormalizedEmail = "GALLOJUNIOR@GMAIL.COM",
-                UserName = "GalloJunior",
-                NormalizedUserName = "GALLOJUNIOR",
+                Email = "eduardoribeiro@gmail.com",
+                NormalizedEmail = "EDUARDORIBEIRO@GMAIL.COM",
+                UserName = "EduardoRibeiro",
+                NormalizedUserName = "EDUARDORIBEIRO",
                 LockoutEnabled = true,
                 EmailConfirmed = true,
-                Nome = "José Antonio Gallo Junior",
-                DataNascimento = DateTime.Parse("05/08/1981"),
-                Foto = "/img/usuarios/ddf093a6-6cb5-4ff7-9a64-83da34aee005.png"
-            }
+                Name = "Eduardo Ribeiro"
+                }
         };
         foreach (var user in usuarios)
         {
             PasswordHasher<IdentityUser> pass = new();
             user.PasswordHash = pass.HashPassword(user, "123456");
         }
-        builder.Entity<Usuario>().HasData(usuarios);
+        builder.Entity<User>().HasData(usuarios);
         #endregion
 
         #region Populate UserRole - Usuário com Perfil
@@ -76,10 +74,6 @@ public class AppDbContext : IdentityDbContext<User>
                 UserId = usuarios[0].Id,
                 RoleId = roles[1].Id
             },
-            new IdentityUserRole<string>() {
-                UserId = usuarios[0].Id,
-                RoleId = roles[2].Id
-            }
         };
         builder.Entity<IdentityUserRole<string>>().HasData(userRoles);
         #endregion
